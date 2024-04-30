@@ -57,11 +57,13 @@ Material:
     m_Floats:
     - OverlayAmount: 0.5
     - _Falloff: 50
-    - _GridScale: 1
+    - _GridScale: 0.5
     - _OverlayAmount: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0
     - __dirty: 0
     m_Colors:
+    - _BColor: {r: 1, g: 0.7921569, b: 0, a: 0}
     - _BaseColor: {r: 0.5058824, g: 0.53333336, b: 0.5647059, a: 0}
+    - _BaseColor_1: {r: 1, g: 0.7921569, b: 0, a: 0}
   m_BuildTextureStacks: []
