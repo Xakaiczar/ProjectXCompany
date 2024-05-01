@@ -17,6 +17,7 @@ namespace XCOM
         // Protected Properties //
 
         // Private Properties //
+        [SerializeField] GameObject cursor;
 
         // Cached Components //
 
@@ -26,6 +27,23 @@ namespace XCOM
 
         // Private Methods //
         private void Update()
+        {
+            GetHit();
+        }
+
+        private void GetHit()
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            bool hasHit = Physics.Raycast(ray, out RaycastHit hit);
+
+            if (hasHit)
+            {
+                Vector3 mousePosition = new Vector3(hit.point.x, 0f, hit.point.z);
+                cursor.transform.position = mousePosition;
+            }
+        }
+
+        private void GetMultipleHits()
         {
             RaycastHit[] hits = Physics.RaycastAll(GetRayFromMousePosition());
 
