@@ -359,7 +359,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1452681477}
   m_LocalEulerAnglesHint: {x: 50, y: -150, z: -170}
 --- !u!114 &410087042
 MonoBehaviour:
@@ -436,6 +436,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 137720934533220950, guid: 2f3e27eecb190e44a9af50723c394274,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f685a57b9da560a448bb95374a652f90, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -690,6 +695,7 @@ Transform:
   m_Children:
   - {fileID: 745990819}
   - {fileID: 909708181}
+  - {fileID: 410087041}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2113989156
@@ -701,6 +707,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2113989157}
+  - component: {fileID: 2113989158}
+  - component: {fileID: 2113989159}
   m_Layer: 0
   m_Name: Unit
   m_TagString: Untagged
@@ -724,12 +732,38 @@ Transform:
   - {fileID: 48568436}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2113989158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113989156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b5b6c37d51793e49b8bff663eb1b9b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveLocation: {x: 4, y: 0, z: 4}
+--- !u!114 &2113989159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113989156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2a583a9d53b59a42891e812b8dc5917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  accuracyTolerance: 0.01
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 330585546}
-  - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 1452681477}
   - {fileID: 2113989157}
