@@ -18,7 +18,7 @@ namespace XCOM
 
         // Private Properties //
         [SerializeField] private float speed;
-        [SerializeField] private float accuracyTolerance;
+        [SerializeField] private float stoppingDistance;
 
         // Cached Components //
 
@@ -27,7 +27,7 @@ namespace XCOM
         // Public Methods //
         public void Move(Vector3 newLocation)
         {
-            if (Vector3.Distance(transform.position, newLocation) < accuracyTolerance)
+            if (Vector3.Distance(transform.position, newLocation) < stoppingDistance)
             {
                 transform.position = newLocation;
             }
