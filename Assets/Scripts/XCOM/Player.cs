@@ -19,6 +19,7 @@ namespace XCOM
         // Private Properties //
         [SerializeField] private GameObject cursor;
         [SerializeField] private LayerMask floorLayer;
+        [SerializeField] private Unit unit;
 
         // Cached Components //
 
@@ -29,19 +30,16 @@ namespace XCOM
         // Private Methods //
         private void Update()
         {
-            GetHit();
+            cursor.transform.position = GetHitLocation();
+            MoveUnit();
         }
 
-        private void GetHit()
+        private Vector3 GetHitLocation()
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             bool hasHit = Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, floorLayer);
 
-            if (hasHit)
-            {
-                // Vector3 mousePosition = new Vector3(hit.point.x, 0f, hit.point.z);
-                cursor.transform.position = hit.point;
-            }
+            return hit.point;
         }
 
         private void GetMultipleHits()
@@ -60,6 +58,14 @@ namespace XCOM
         private Ray GetRayFromMousePosition()
         {
             return Camera.main.ScreenPointToRay(Input.mousePosition);
+        }
+
+        private void MoveUnit()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                unit.SetMoveLocation(GetHitLocation());
+            }
         }
     }
 }

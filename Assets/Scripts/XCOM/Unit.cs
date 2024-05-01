@@ -34,6 +34,10 @@ namespace XCOM
         // Cached References //
 
         // Public Methods //
+        public void SetMoveLocation(Vector3 moveLocation)
+        {
+            this.moveLocation = moveLocation;
+        }
 
         // Private Methods //
         private void Update()

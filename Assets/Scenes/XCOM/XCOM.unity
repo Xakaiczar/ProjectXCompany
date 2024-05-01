@@ -178,6 +178,7 @@ MonoBehaviour:
   floorLayer:
     serializedVersion: 2
     m_Bits: 64
+  unit: {fileID: 2113989158}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,7 +942,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5b6c37d51793e49b8bff663eb1b9b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveLocation: {x: 4, y: 0, z: 4}
 --- !u!114 &2113989159
 MonoBehaviour:
   m_ObjectHideFlags: 0
