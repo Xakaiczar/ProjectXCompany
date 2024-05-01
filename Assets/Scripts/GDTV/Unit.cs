@@ -4,46 +4,49 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-public class Unit : MonoBehaviour
+namespace GDTV
 {
-    // Public Events //
-
-    // Public Enums //
-
-    // Public Properties //
-
-    // Protected Properties //
-
-    // Private Properties //
-    private Vector3 targetPosition;
-
-    // Cached Components //
-
-    // Cached References //
-
-    // Public Methods //
-
-    // Private Methods //
-    private void Update()
+    public class Unit : MonoBehaviour
     {
-        float stoppingDistance = 0.1f;
+        // Public Events //
 
-        if (Vector3.Distance(transform.position, targetPosition) > stoppingDistance)
+        // Public Enums //
+
+        // Public Properties //
+
+        // Protected Properties //
+
+        // Private Properties //
+        private Vector3 targetPosition;
+
+        // Cached Components //
+
+        // Cached References //
+
+        // Public Methods //
+
+        // Private Methods //
+        private void Update()
         {
-            Vector3 moveDirection = (targetPosition - transform.position).normalized;
-            float moveSpeed = 4f;
+            float stoppingDistance = 0.1f;
 
-            transform.position += moveDirection * moveSpeed * Time.deltaTime;
+            if (Vector3.Distance(transform.position, targetPosition) > stoppingDistance)
+            {
+                Vector3 moveDirection = (targetPosition - transform.position).normalized;
+                float moveSpeed = 4f;
+
+                transform.position += moveDirection * moveSpeed * Time.deltaTime;
+            }
+
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                Move(new Vector3(4, 0, 4));
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.T))
+        private void Move(Vector3 targetPosition)
         {
-            Move(new Vector3(4, 0, 4));
+            this.targetPosition = targetPosition;
         }
-    }
-
-    private void Move(Vector3 targetPosition)
-    {
-        this.targetPosition = targetPosition;
     }
 }
