@@ -17,20 +17,32 @@ namespace GDTV
         // Protected Properties //
 
         // Private Properties //
+        [SerializeField] private LayerMask floorLayer;
+
+        private static MouseWorld instance;
 
         // Cached Components //
 
         // Cached References //
 
         // Public Methods //
-
-        // Private Methods //
-        private void Update()
+        public static Vector3 GetPosition()
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            bool hasHit = Physics.Raycast(ray);
+            bool hasHit = Physics.Raycast(ray, out RaycastHit raycastHit, float.MaxValue, instance.floorLayer);
 
-            Debug.Log(hasHit);
+            return raycastHit.point;
         }
+
+        // Private Methods //
+        private void Awake()
+        {
+            instance = this;
+        }
+
+        // private void Update()
+        // {
+        //     transform.position = MouseWorld.GetPosition();
+        // }
     }
 }
