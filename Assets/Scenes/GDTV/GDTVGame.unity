@@ -515,6 +515,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 682879296}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &682879298 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95787105524477528, guid: 2f3e27eecb190e44a9af50723c394274,
+    type: 3}
+  m_PrefabInstance: {fileID: 682879296}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &745990818
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1048,6 +1054,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b060f2c8f498d246b5da21cdc9a35df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitAnimator: {fileID: 682879298}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -17,6 +17,8 @@ namespace GDTV
         // Protected Properties //
 
         // Private Properties //
+        [SerializeField] private Animator unitAnimator;
+
         private Vector3 targetPosition;
 
         // Cached Components //
@@ -36,6 +38,12 @@ namespace GDTV
                 float moveSpeed = 4f;
 
                 transform.position += moveDirection * moveSpeed * Time.deltaTime;
+
+                unitAnimator.SetBool("isMoving", true);
+            }
+            else
+            {
+                unitAnimator.SetBool("isMoving", false);
             }
 
             if (Input.GetMouseButtonDown(0))
