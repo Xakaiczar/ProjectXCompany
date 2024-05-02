@@ -25,16 +25,20 @@ namespace XCOM
         // Cached References //
 
         // Public Methods //
-        public void MoveTowards(Vector3 destination)
+        public bool MoveTowards(Vector3 destination)
         {
             if (Vector3.Distance(transform.position, destination) < stoppingDistance)
             {
                 transform.position = destination;
+
+                return false;
             }
             else
             {
                 Vector3 direction = destination - transform.position;
                 transform.position += direction.normalized * speed * Time.deltaTime;
+
+                return true;
             }
         }
 

@@ -16,6 +16,15 @@ namespace XCOM
         // Public Properties //
 
         // Protected Properties //
+        protected Animator Animator
+        {
+            get
+            {
+                if (!_animator) _animator = GetComponentInChildren<Animator>();
+                return _animator;
+            }
+        }
+
         protected Mover Mover
         {
             get
@@ -25,11 +34,11 @@ namespace XCOM
             }
         }
 
-
         // Private Properties //
         [SerializeField] private Vector3 moveLocation;
 
         // Cached Components //
+        private Animator _animator;
         private Mover _mover;
 
         // Cached References //
@@ -43,7 +52,9 @@ namespace XCOM
         // Private Methods //
         private void Update()
         {
-            Mover.MoveTowards(moveLocation);
+            bool isMoving = Mover.MoveTowards(moveLocation);
+
+            Animator.SetBool("isMoving", isMoving);
         }
     }
 }
