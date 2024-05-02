@@ -25,15 +25,15 @@ namespace XCOM
         // Cached References //
 
         // Public Methods //
-        public void Move(Vector3 newLocation)
+        public void MoveTowards(Vector3 destination)
         {
-            if (Vector3.Distance(transform.position, newLocation) < stoppingDistance)
+            if (Vector3.Distance(transform.position, destination) < stoppingDistance)
             {
-                transform.position = newLocation;
+                transform.position = destination;
             }
             else
             {
-                Vector3 direction = newLocation - transform.position;
+                Vector3 direction = destination - transform.position;
                 transform.position += direction.normalized * speed * Time.deltaTime;
             }
         }

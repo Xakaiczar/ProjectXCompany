@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace XCOM
 {
+    [RequireComponent(typeof(Mover))]
     public class Unit : MonoBehaviour
     {
         // Public Events //
@@ -42,7 +43,7 @@ namespace XCOM
         // Private Methods //
         private void Update()
         {
-            Mover.Move(moveLocation);
+            Mover.MoveTowards(moveLocation);
         }
     }
 }
