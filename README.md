@@ -33,6 +33,11 @@ _Commit(s): [7321ab5](https://github.com/Xakaiczar/ProjectXCompany/commit/7321ab
 > This will likely be one of the longest sections, as I'll have to explain some of my personal design choices. In the future, I will move longer explanations to the section above.
 
 ### Code Explanation
+The purpose of this code is to allow a `Unit` to move in world space.
+
+All things considered, it's pretty straightforward: a destination is passed to a generic `Move` method from the `Mover` component that will be called every frame from `Unit`. The distance between the `Unit`'s current position and the destination will be measured; if it's greater than the `accuracyTolerance` / `stoppingDistance` then it will move a bit closer to its destination, otherwise it will be snapped to the destination and the `Unit` will stop moving.
+
+All you need to do is input the destination into the `moveLocation` vector on the `Unit`, which is accessible in the Unity Inspector. With that, the `Unit` will make its way across the world towards the chosen destination!
 
 ### Differences in Implementation
 My implementation was somewhat different to the original design. First of all, as I often do, I made two separate scripts instead of one. This may seem a bit redundant, as the original script only does one thing anyway right now. But that's the important part to me: it might not be doing much _right now_, but in the future, it will likely do a lot more. The GDTV `Unit` class will therefore inevitably break the single-responsibility principle once the unit can do more than just move (although technically, it already handles both movement _and_ user input).
