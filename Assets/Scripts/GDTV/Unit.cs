@@ -36,8 +36,11 @@ namespace GDTV
             {
                 Vector3 moveDirection = (targetPosition - transform.position).normalized;
                 float moveSpeed = 4f;
+                float rotateSpeed = 10f;
 
                 transform.position += moveDirection * moveSpeed * Time.deltaTime;
+
+                transform.forward = Vector3.Lerp(transform.forward, moveDirection, rotateSpeed * Time.deltaTime);
 
                 unitAnimator.SetBool("isMoving", true);
             }
