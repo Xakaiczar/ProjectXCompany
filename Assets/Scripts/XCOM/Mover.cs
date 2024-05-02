@@ -36,7 +36,10 @@ namespace XCOM
             else
             {
                 Vector3 direction = destination - transform.position;
+                Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
+
                 transform.position += direction.normalized * speed * Time.deltaTime;
+                transform.rotation = Quaternion.Lerp(transform.rotation, rotation, speed * Time.deltaTime);
 
                 return true;
             }
