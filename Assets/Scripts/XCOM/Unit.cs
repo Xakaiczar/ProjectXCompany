@@ -34,16 +34,28 @@ namespace XCOM
             }
         }
 
+        protected UISelectedUnit UISelected
+        {
+            get
+            {
+                if (!_uiSelected) _uiSelected = GetComponentInChildren<UISelectedUnit>();
+                return _uiSelected;
+            }
+        }
+
         // Private Properties //
         private Vector3 moveDestination;
 
         // Cached Components //
         private Model _model;
         private Mover _mover;
+        private UISelectedUnit _uiSelected;
 
         // Cached References //
 
         // Public Methods //
+        public void ToggleSelectedDisplay(bool isEnabled) => UISelected.ToggleDisplay(isEnabled);
+
         public void SetMoveDestination(Vector3 newDestination)
         {
             moveDestination = newDestination;
