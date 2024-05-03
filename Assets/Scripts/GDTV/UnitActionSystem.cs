@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using GDTV;
+
 using UnityEngine;
 
 namespace GDTV
@@ -9,10 +9,12 @@ namespace GDTV
     public class UnitActionSystem : MonoBehaviour
     {
         // Public Events //
+        public event EventHandler OnSelectedUnitChanged;
 
         // Public Enums //
 
         // Public Properties //
+        public static UnitActionSystem Instance { get; private set; }
 
         // Protected Properties //
 
@@ -25,8 +27,26 @@ namespace GDTV
         // Cached References //
 
         // Public Methods //
+        public Unit GetSelectedUnit()
+        {
+            return selectedUnit;
+        }
 
         // Private Methods //
+        private void Awake()
+        {
+            if (Instance != null)
+            {
+                Debug.Log("There's more than one UAS!");
+
+                Destroy(gameObject);
+                
+                return;
+            }
+
+            Instance = this;
+        }
+
         private void Update()
         {
             if (Input.GetMouseButtonDown(0))
@@ -46,11 +66,18 @@ namespace GDTV
 
             if (!hasHit) return false;
 
-            bool isUnit = raycastHit.transform.TryGetComponent<Unit>(out Unit unit);
+            bool isUnit = raycastHit.transform.TryGetComponent(out Unit unit);
 
-            if (isUnit) selectedUnit = unit;
+            if (isUnit) SetSelectedUnit(unit);
 
             return isUnit;
+        }
+
+        private void SetSelectedUnit(Unit unit)
+        {
+            selectedUnit = unit;
+
+            OnSelectedUnitChanged?.Invoke(null, EventArgs.Empty);
         }
     }
 }
