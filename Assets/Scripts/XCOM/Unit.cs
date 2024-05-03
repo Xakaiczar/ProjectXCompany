@@ -16,12 +16,12 @@ namespace XCOM
         // Public Properties //
 
         // Protected Properties //
-        protected Animator Animator
+        protected Model Model
         {
             get
             {
-                if (!_animator) _animator = GetComponentInChildren<Animator>();
-                return _animator;
+                if (!_model) _model = GetComponentInChildren<Model>();
+                return _model;
             }
         }
 
@@ -35,26 +35,34 @@ namespace XCOM
         }
 
         // Private Properties //
-        [SerializeField] private Vector3 moveLocation;
+        private Vector3 moveDestination;
 
         // Cached Components //
-        private Animator _animator;
+        private Model _model;
         private Mover _mover;
 
         // Cached References //
 
         // Public Methods //
-        public void SetMoveLocation(Vector3 moveLocation)
+        public void SetMoveDestination(Vector3 newDestination)
         {
-            this.moveLocation = moveLocation;
+            moveDestination = newDestination;
         }
 
         // Private Methods //
+        private void Awake()
+        {
+            moveDestination = transform.position;
+        }
+
         private void Update()
         {
-            bool isMoving = Mover.MoveTowards(moveLocation);
+            bool isMoving = Mover.MoveTowards(moveDestination);
+            Vector3 direction = Mover.GetMoveDirection(moveDestination);
 
-            Animator.SetBool("isMoving", isMoving);
+            Model.UpdateMoveAnimation(isMoving);
+
+            Model.RotateModel(direction);
         }
     }
 }

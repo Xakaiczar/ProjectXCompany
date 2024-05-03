@@ -35,14 +35,17 @@ namespace XCOM
             }
             else
             {
-                Vector3 direction = destination - transform.position;
-                Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
-
+                Vector3 direction = GetMoveDirection(destination);
+                
                 transform.position += direction.normalized * speed * Time.deltaTime;
-                transform.rotation = Quaternion.Lerp(transform.rotation, rotation, speed * Time.deltaTime);
 
                 return true;
             }
+        }
+
+        public Vector3 GetMoveDirection(Vector3 destination)
+        {
+            return destination - transform.position;
         }
 
         // Private Methods //

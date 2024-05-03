@@ -19,7 +19,8 @@ namespace XCOM
         // Private Properties //
         [SerializeField] private GameObject cursor;
         [SerializeField] private LayerMask floorLayer;
-        [SerializeField] private Unit unit;
+        [SerializeField] private LayerMask unitLayer;
+        [SerializeField] private Unit selectedUnit;
 
         // Cached Components //
 
@@ -31,15 +32,22 @@ namespace XCOM
         private void Update()
         {
             cursor.transform.position = GetHitLocation();
-            MoveUnit();
+            HandleClickEvent();
         }
 
         private Vector3 GetHitLocation()
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            bool hasHit = Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, floorLayer);
+            RaycastHit hit = GetHitOnLayer(floorLayer);
 
             return hit.point;
+        }
+
+        private RaycastHit GetHitOnLayer(LayerMask layer)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            bool hasHit = Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, layer);
+
+            return hit;
         }
 
         private void GetMultipleHits()
@@ -60,11 +68,18 @@ namespace XCOM
             return Camera.main.ScreenPointToRay(Input.mousePosition);
         }
 
-        private void MoveUnit()
+        private void HandleClickEvent()
         {
             if (Input.GetMouseButtonDown(0))
             {
-                unit.SetMoveLocation(GetHitLocation());
+                Transform hitTransform = GetHitOnLayer(unitLayer).transform;
+                Unit clickedUnit = hitTransform?.GetComponent<Unit>();
+
+                if (clickedUnit) selectedUnit = clickedUnit;
+            }
+            else if (Input.GetMouseButtonDown(1))
+            {
+                selectedUnit.SetMoveDestination(GetHitLocation());
             }
         }
     }
