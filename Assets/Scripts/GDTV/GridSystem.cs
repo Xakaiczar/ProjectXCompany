@@ -20,6 +20,7 @@ namespace GDTV
         private int width;
         private int height;
         private float cellSize;
+        private GridObject[,] gridObjectArray;
 
         // Cached Components //
 
@@ -32,11 +33,15 @@ namespace GDTV
             this.height = height;
             this.cellSize = cellSize;
 
+            gridObjectArray = new GridObject[width, height];
+
             for (int x = 0; x < width; x++)
             {
                 for (int z = 0; z < height; z++)
                 {
-                    Debug.DrawLine(GetWorldPosition(x, z), GetWorldPosition(x, z) + (Vector3.right * 0.5f), Color.white, float.MaxValue);
+                    GridPosition gridPosition = new GridPosition(x, z);
+
+                    gridObjectArray[x, z] = new GridObject(this, gridPosition);
                 }
             }
         }
@@ -52,6 +57,17 @@ namespace GDTV
             int z = Mathf.RoundToInt(worldPosition.z / cellSize);
 
             return new GridPosition(x, z);
+        }
+
+        public void CreateDebugObjects(Transform debugPrefab)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                for (int z = 0; z < height; z++)
+                {
+                    GameObject.Instantiate(debugPrefab, GetWorldPosition(x, z), Quaternion.identity);
+                }
+            }
         }
 
         // Private Methods //

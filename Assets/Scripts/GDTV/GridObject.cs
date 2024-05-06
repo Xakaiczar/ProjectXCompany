@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace GDTV
 {
-    public class Testing : MonoBehaviour
+    public class GridObject
     {
         // Public Events //
 
@@ -17,26 +17,20 @@ namespace GDTV
         // Protected Properties //
 
         // Private Properties //
-        [SerializeField] private Transform gridDebugObjectPrefab;
-
         private GridSystem gridSystem;
+        private GridPosition gridPosition;
 
         // Cached Components //
 
         // Cached References //
 
         // Public Methods //
+        public GridObject(GridSystem gridSystem, GridPosition gridPosition)
+        {
+            this.gridSystem = gridSystem;
+            this.gridPosition = gridPosition;
+        }
 
         // Private Methods //
-        private void Start()
-        {
-            gridSystem = new GridSystem(10, 10, 2f);
-            gridSystem.CreateDebugObjects(gridDebugObjectPrefab);
-        }
-
-        private void Update()
-        {
-            Debug.Log(gridSystem.GetGridPosition(MouseWorld.GetPosition()));
-        }
     }
 }
