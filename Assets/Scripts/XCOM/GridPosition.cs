@@ -1,19 +1,19 @@
 namespace XCOM
 {
-    struct GridPosition
+    public struct GridPosition
     {
-        public int X { get; }
-        public int Z { get; }
+        public int x { get; }
+        public int z { get; }
 
         public GridPosition(int x, int z)
         {
-            X = x;
-            Z = z;
+            this.x = x;
+            this.z = z;
         }
 
         public override string ToString()
         {
-            return $"{X}, {Z}";
+            return $"x: {x}; z: {z}";
         }
     }
 }
