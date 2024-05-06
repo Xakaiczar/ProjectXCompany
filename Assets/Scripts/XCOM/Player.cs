@@ -9,6 +9,7 @@ namespace XCOM
     public class Player : MonoBehaviour
     {
         // Public Events //
+        public event EventHandler<Unit> OnUnitSelected;
 
         // Public Enums //
 
@@ -113,6 +114,8 @@ namespace XCOM
         private void SelectUnit(Unit selectedUnit)
         {
             this.selectedUnit = selectedUnit;
+
+            OnUnitSelected?.Invoke(null, this.selectedUnit);
 
             foreach (Unit unit in units)
             {
