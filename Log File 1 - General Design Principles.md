@@ -20,7 +20,7 @@ Already this method seems to be working a lot better than the last; it means I c
 
 ### Single Responsibility Principle
 Each class should only really do one thing. This is called the Single Responsibility Principle, part of the SOLID design principles for object-oriented programming. In that vein, each class I write tends to be atomic, handling one single part of an object's functionality. I have two different design philosophies for components:
-- **Property components:** these components represent a single property or action. Their sole responsibility is to either modify or return a piece of data attached to an object (such as a player's health), or perform a function on that object (for instance, pathfinding for a unit on a grid-based game). These components cannot operate alone; they describe what an object is and what it can do, but not how it must do it.
+- **Property components:** these components represent a single property or action. Their sole responsibility is to either modify or return a piece of data attached to an object (such as a player's health), or perform a function on that object (for instance, pathfinding for a unit on a grid-based game). These components cannot operate alone; they describe what an object is and what it can do, but not how or when it must do it.
 - **Behavioural components**: these components coordinate property components in order to create a desired behaviour in the object they're attached to. While a bit more complex, their sole purpose is to decide when certain actions must be taken, as well as the conditions under which properties can change. These components are almost like the "brains" of the object, tying together data and functions to create more complex behaviours.
 
 For example: `Health` would be a "property component", as it stores a value, as well as methods to modify and return that value for UI or logical processing elsewhere in the program. However, in order to adhere to the Single Responsibility Principle, it does _not_ contain any logic about if or when that object dies, nor what happens after. That is decided by `Unit`. For instance, when the value of `Health` reaches 0, a `Unit` may trigger a death function, which would disable the unit object and possibly trigger any animation / sfx / vfx / etc from another property component.
@@ -35,9 +35,13 @@ The problem I often had with that is in the script execution order, or even some
 I still store the reference in a private variable as usual, but now I also create a protected getter. From now on, whenever I try to access the reference, I go through the getter. If that variable has a reference (i.e. is not null) then great! All the getter will do is return the reference. If not, however, the getter actually tries to get a reference first and stores it in the private variable before returning it. Each component only gets the references it needs as and when it needs them, as opposed to fetching them all on `Start` and just _hoping_ they start before another key component...
 
 ### Singletons
-Singletons are necessary in Unity sometimes. For example, going from scene to scene you might need some persistent data. This can vary between games, but at the very least, you probably don't want the music stopping and starting every scene load, nor do you want the player to lose all their data between scenes. If those systems aren't singletons however, you may have the opposite problem: conflicting player data and double the music! What a nightmare!
+Singletons are defined as classes that do two things:
+1. Restrict a class to a single instance of itself
+2. Make a class publicly accessible to the rest of the system
 
-That said, singletons are often described as an "anti-pattern" (including by GameDevTV themselves) because they are functionally global data that can be silently accessed by anything in the scene without passing references. If they are stateful, they are doubly as bad, as stale state may persist throughout the runtime of the game, creating all kinds of untestable issues. As far as I'm concerned, unless they're on the top level of code - in other words, they _are_ the global state - then they're not the ideal solution to any problem.
+Singletons are necessary in Unity sometimes. Take the first point: sometimes, you need a class to only exist once, with some consistency between scene loads. For example, going from scene to scene you might need some persistent data. This can vary between games, but at the very least, you probably don't want the music stopping and starting every scene load, nor do you want the player to lose all their data between scenes. If those systems aren't singletons however, you may have the opposite problem: conflicting player data and double the music! What a nightmare!
+
+That said, singletons are often described as an "anti-pattern" (including by GameDevTV themselves) for exactly the second point: they are functionally global data that can be silently accessed by anything in the scene without passing references. If they are stateful, they are doubly as bad, as stale state may persist throughout the runtime of the game, creating all kinds of untestable issues. As far as I'm concerned, unless they're on the top level of code - in other words, they _are_ the global state - then they're not the ideal solution to any problem.
 
 Which is why it's very odd that - throughout the course - the lecturer creates _so many singletons_.
 
@@ -47,6 +51,9 @@ Since this is such a huge part of the lecturer's design, I felt like I needed to
 - if an object needs to persist between scenes, and that object must be the only one of its kind: it's a singleton
 - otherwise, it can - and should - be done the old fashioned way: it's a regular component
 
-Plus, if and when the need arises, I would not have a component _also_ be a singlton; that violates the single responsibility principle. I would probably just create a component whose sole purpose is to track all the "singleton" files and make sure they persist as you'd expect, deleting any duplicates.
+I would also _never_ have a singleton be considered global state. Global state has the potential to introduce too many hard-to-track bugs even in single-threaded applications. I would much rather just pass  the necessary data down through parameters, rather than the _entire_ global object, or use events to synchronise unrelated - but thematically linked - procedures. In the words of the lecturer of this very course:
+> _Static should be used very sparingly. They basically act as global state, which is always tricky and prone to mistakes._
+
+Plus, if and when the need arises, I would not have a component _also_ be a singleton; that violates the single responsibility principle. I would probably just create a `Singleton` component whose sole purpose is to make the attached object a singleton, or even a `SingletonManager` that tracks all the wannabe-singleton objects and makes sure they persist as you'd expect, deleting any duplicates.
 
 Needless to say, a lot of the original singletons didn't make it. I regret nothing.
