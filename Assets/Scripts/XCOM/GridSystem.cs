@@ -21,9 +21,9 @@ namespace XCOM
         [SerializeField] private int cellSize;
         [SerializeField] private int gridWidth;
         [SerializeField] private int gridLength;
-        [SerializeField] private GameObject spherePrefab;
+        [SerializeField] private GridObject gridPrefab;
 
-        private GridPosition[,] grid;
+        private GridObject[,] grid;
 
         // Cached Components //
 
@@ -51,17 +51,15 @@ namespace XCOM
         // Private Methods //
         private void Awake()
         {
-            grid = new GridPosition[gridWidth, gridLength];
+            grid = new GridObject[gridWidth, gridLength];
 
             for (int x = 0; x < gridWidth; x++)
             {
                 for (int z = 0; z < gridLength; z++)
                 {
-                    grid[x, z] = new GridPosition(x, z);
+                    grid[x, z] = Instantiate(gridPrefab, GetWorldPosition(x, z), Quaternion.identity, transform);
 
-                    var sphere = Instantiate(spherePrefab, GetWorldPosition(x, z), Quaternion.identity);
-
-                    Debug.Log(GetGridPosition(sphere.transform.position));
+                    grid[x, z].SetPosition(new GridPosition(x, z));
                 }
             }
         }

@@ -749,7 +749,7 @@ MonoBehaviour:
   cellSize: 2
   gridWidth: 10
   gridLength: 5
-  spherePrefab: {fileID: 3528274095405653651, guid: 45d8c7a2fbbd64649abdf4cf2430ec12,
+  gridPrefab: {fileID: 3004742198048767266, guid: 3fa1bf53c448b9d468bb66db3d2f5b1a,
     type: 3}
 --- !u!1 &909708177
 GameObject:
