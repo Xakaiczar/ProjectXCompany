@@ -3,28 +3,10 @@ Hi! This project is based off the course _Unity Turn-Based Strategy Game: Interm
 
 The code will be written under two separate namespaces: GameDevTV (GDTV) and X-Company (XCOM). The former will encapsulate the original tutorial as a reference for myself if I need it during development, while the latter will include my own implementation of their suggested features. Hopefully, this will make each version of the code much easier to maintain. I don't want a repeat of last time... (trust me, it was a mess!)
 
-The rest of this readme will act as a devlog-type document, explaining the code written and the features added. I will also use that space to explain the differences between my implementation and GDTV's original vision, as well as the logic behind my choices. So let's hope my decisions are, in fact, logical!
+Below are links to my logs, explaining the code written and the features added. I will also use that space to explain the differences between my implementation and GDTV's original vision, as well as the logic behind my choices. So let's hope my decisions are, in fact, logical!
 
-So, without further ado, it's time to crack on!
-
-## General Design Principles
-This section will detail some of my general design philosophies. Right or wrong, I think it's easier to understand someone's decisions if you understand the logic they use to make those decisions. Plus, if I'm wrong, it'll be easier to explain why!
-
-These principles will likely change over time as I grow as a programmer and as a person. But these are some of the design choices I have made while working on this project.
-
-### Namespaces
-GDTV vs XCOM; any extensions
-
-### Single Responsibility Principle
-- separate files; cleaner code and separation of responsibilities (SOLID)
-  - property files vs. behaviour files
-  - personally don't like to use update in property files
-
-### Caching
-component caching; naming convention, purpose
-
-### Singletons
-No thank you.
+## Logs
+[Log File 1 - General Design Principles](https://github.com/Xakaiczar/ProjectXCompany/blob/main/Log%20File%201%20-%20General%20Design%20Principles.md)
 
 ## Unit Movement
 _Commit(s): [7321ab5](https://github.com/Xakaiczar/ProjectXCompany/commit/7321ab59e0ef8ba09d6a0756004270aa7fc3876a) and [07b2a6a](https://github.com/Xakaiczar/ProjectXCompany/commit/07b2a6a92097ee6917c757aef7d798712506c118)_
