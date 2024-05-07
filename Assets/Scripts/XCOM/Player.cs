@@ -96,7 +96,7 @@ namespace XCOM
             }
             else if (Input.GetMouseButtonDown(1))
             {
-                selectedUnit.SetMoveDestination(GetHitLocation());
+                selectedUnit?.SetMoveDestination(GetHitLocation());
             }
         }
 

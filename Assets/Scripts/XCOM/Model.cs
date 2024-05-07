@@ -25,6 +25,7 @@ namespace XCOM
         }
 
         // Private Properties //
+        [SerializeField] private float rotationSpeed;
 
         // Cached Components //
         private Animator _animator;
@@ -42,7 +43,7 @@ namespace XCOM
             if (direction == Vector3.zero) return;
             
             Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
-            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 5f * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
         }
 
         // Private Methods //
