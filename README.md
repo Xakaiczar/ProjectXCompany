@@ -12,7 +12,7 @@ Below are links to my logs, explaining the code written and the features added. 
 _Commit(s): [7321ab5](https://github.com/Xakaiczar/ProjectXCompany/commit/7321ab59e0ef8ba09d6a0756004270aa7fc3876a) and [07b2a6a](https://github.com/Xakaiczar/ProjectXCompany/commit/07b2a6a92097ee6917c757aef7d798712506c118)_
 
 > [!NOTE]
-> This will likely be one of the longest sections, as I'll have to explain some of my personal design choices. In the future, I will move longer explanations to the section above.
+> This will likely be one of the longest sections, as I'll have to explain some of my personal design choices. In the future, I will move longer explanations to the [General Design Principles](https://github.com/Xakaiczar/ProjectXCompany/blob/main/Log%20File%201%20-%20General%20Design%20Principles.md) doc.
 
 ### Code Explanation
 The purpose of this code is to allow a `Unit` to move in world space.
@@ -84,14 +84,21 @@ Hindsight is 20/20, but luckily, it was an easy fix.
 I simply created a new layer mask for the floor, then used the `layerMask` parameter of `Physics.Raycast` to filter out any objects not on the `floor` layer. Now everything was working as intended.
 
 ### Differences in Implementation
-  - also not sure if being able to select through walls is a good thing?
-  - when rewriting, I realised dropping hit.point.y to 0 actually stops this in probably a better way, but I still stuck to the brief
+Originally, I mistakenly cut the `y` value of `RaycastHit.point`, both forgetting about the sphere's collider and not fully understanding the design brief. However, part of me still thinks this may be a more effective solution down the line. After all, if we're only selecting the floor, then why would we need a higher `y` value than 0?
 
+In my original version, this meant that the ray would collide with a wall, but not travel up it, which I assume must be acceptable behaviour if we're only selecting the floor. A perhaps unintentional side effect of the current implementation (by design) is that the cursor - in its search for floors - now _ignores_ walls, meaning you can actually select _beyond_ a wall to a square you can't see. I'm not sure if this is intended behaviour, or even if it's a good thing either way.
 
-- static...
-  - oh god it's a singleton!
-  - creates weird dependencies and code that cannot be reused easily
-  - "static should be used very sparingly. they basically act as global state, which is always tricky and prone to mistakes."
+I have stuck to the design for now, but this may change in the future, as I believe some aspects of my original design worked better. I think the answer is somewhere between my design and their intended design. I will see how it works out in practice before I make any adjustments however.
+
+There's also one big glaring difference between the two: singletons... 
+
+And so it begins...
+
+I have hopefully made my stance on singletons very clear in my [first log](https://github.com/Xakaiczar/ProjectXCompany/blob/main/Log%20File%201%20-%20General%20Design%20Principles.md#singletons). If memory serves me correctly, they crop up a _lot_ in this course, and was one of the biggest frustrations about doing it in the first place.
+
+This is definitely one of those cases where we _do not_ want a weird dependency on the mouse. Best-case scenario, even if you want this as a singleton, using its global scope to directly reference it in `Unit` restricts the player's controller to mouse only. If you wanted to implement controller support, for example (or even just _keyboard_ support), you'd have to do a lot of rewriting. It also makes the `Unit` code harder to reuse and harder to debug. It just seems like a bad idea all round, really.
+
+Ideally, you just want to pass the location to the `Unit`. How the program actually gets that location should be completely irrelevant to the `Unit`.
 
 
 
