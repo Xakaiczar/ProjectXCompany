@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using TMPro;
 
 namespace GDTV
 {
-    public class GridObject
+    public class GridDebugObject : MonoBehaviour
     {
         // Public Events //
 
@@ -17,20 +18,24 @@ namespace GDTV
         // Protected Properties //
 
         // Private Properties //
-        private GridSystem gridSystem;
-        private GridPosition gridPosition;
+        [SerializeField] private TextMeshPro textMeshPro;
+
+        private GridObject gridObject;
 
         // Cached Components //
 
         // Cached References //
 
         // Public Methods //
-        public GridObject(GridSystem gridSystem, GridPosition gridPosition)
+        public void SetGridObject(GridObject gridObject)
         {
-            this.gridSystem = gridSystem;
-            this.gridPosition = gridPosition;
+            this.gridObject = gridObject;
         }
 
         // Private Methods //
+        private void Update()
+        {
+            textMeshPro.text = gridObject.ToString();
+        }
     }
 }
