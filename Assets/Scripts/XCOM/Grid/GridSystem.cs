@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
-namespace XCOM
+namespace XCOM.Grid
 {
     public class GridSystem : MonoBehaviour
     {
@@ -46,6 +46,11 @@ namespace XCOM
             int z = Mathf.RoundToInt(worldPosition.z / cellSize);
 
             return new GridPosition(x, z);
+        }
+
+        public GridObject GetGridObject(GridPosition gridPosition)
+        {
+            return grid[gridPosition.x, gridPosition.z];
         }
 
         // Private Methods //

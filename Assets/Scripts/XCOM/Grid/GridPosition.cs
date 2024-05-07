@@ -1,4 +1,4 @@
-namespace XCOM
+namespace XCOM.Grid
 {
     public struct GridPosition
     {

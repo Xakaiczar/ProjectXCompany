@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-namespace XCOM
+namespace XCOM.UI
 {
     public class UIGridObject : MonoBehaviour
     {

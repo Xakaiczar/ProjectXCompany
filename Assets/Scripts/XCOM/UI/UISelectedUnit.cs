@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-namespace XCOM
+namespace XCOM.UI
 {
     public class UISelectedUnit : MonoBehaviour
     {

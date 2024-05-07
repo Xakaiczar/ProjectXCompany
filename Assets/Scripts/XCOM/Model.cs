@@ -24,20 +24,10 @@ namespace XCOM
             }
         }
 
-        protected UISelectedUnit UISelected
-        {
-            get
-            {
-                if (!_uiSelected) _uiSelected = GetComponentInChildren<UISelectedUnit>();
-                return _uiSelected;
-            }
-        }
-
         // Private Properties //
 
         // Cached Components //
         private Animator _animator;
-        private UISelectedUnit _uiSelected;
 
         // Cached References //
 

@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using XCOM.UI;
 
-namespace XCOM
+namespace XCOM.Grid
 {
     public class GridObject : MonoBehaviour
     {
