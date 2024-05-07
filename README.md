@@ -135,7 +135,7 @@ As much as I think their solution is much more succinct, I felt like the rotatio
 I may also implement a separate `rotateSpeed` like they did; this will give the designer more control over the rotation process. But for now, I'm happy with my implementation.
 
 ## Unit Selection
-_Commit(s): [812717e](https://github.com/Xakaiczar/ProjectXCompany/commit/812717e0565bc7a35807eaf15202d4e233be0a23) and [252f970](https://github.com/Xakaiczar/ProjectXCompany/commit/252f9702ee6035c27c5c94e6716691691496da87)_
+_Commit(s): [812717e](https://github.com/Xakaiczar/ProjectXCompany/commit/812717e0565bc7a35807eaf15202d4e233be0a23), [252f970](https://github.com/Xakaiczar/ProjectXCompany/commit/252f9702ee6035c27c5c94e6716691691496da87) and [9b4c070](https://github.com/Xakaiczar/ProjectXCompany/commit/9b4c070c4315cd928b05a13cec0d86c5a7bf82f8)_ 
 
 ### Code Explanation
 The purpose of this code is to handle the control and movement of multiple units.
@@ -146,7 +146,7 @@ Now I needed a way of finding a unit using the mouse. I went against the lecture
 
 I then extracted the `Raycast` logic into `GetHitOnLayer` so it no longer just checked for objects on the floor layer; instead, it now took a layer as a parameter. I did keep `GetHitLocation` however, as a general catch-all for finding where on the ground was clicked.
 
-I changed up the `MoveUnit` function - now named `HandleClickEvent` - which now controls both the functions for clicking on a unit and clicking on the floor. When a unit is clicked, it sets the `selectedUnit` to be a reference to the `Unit` clicked. When the floor is clicked while there's a `selectedUnit` (or rather, at any time, since I apparently didn't validate that a `selectedUnit` existed...), that `Unit` will be moved.
+I changed up the `MoveUnit` function - now named `HandleClickEvent` - which now controls both the functions for clicking on a unit and clicking on the floor. When a unit is clicked, it sets the `selectedUnit` to be a reference to the `Unit` clicked. When the floor is clicked while there's a `selectedUnit` (or rather, at any time, since I apparently didn't validate that a `selectedUnit` existed until [9b4c070](https://github.com/Xakaiczar/ProjectXCompany/commit/9b4c070c4315cd928b05a13cec0d86c5a7bf82f8)), that `Unit` will be moved.
 
 Sure enough, it all worked as intended. That's that done!
 
