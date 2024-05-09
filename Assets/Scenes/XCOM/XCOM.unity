@@ -551,6 +551,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   rotateSpeed: 40
+  scrollSpeed: 50
+  minZoom: 1
+  maxZoom: 7
 --- !u!1001 &745990818
 PrefabInstance:
   m_ObjectHideFlags: 0

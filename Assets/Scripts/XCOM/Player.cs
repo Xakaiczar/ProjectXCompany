@@ -204,6 +204,7 @@ namespace XCOM
         {
             MoveCamera();
             RotateCamera();
+            ZoomCamera();
         }
 
         private void MoveCamera()
@@ -248,6 +249,11 @@ namespace XCOM
             }
 
             CameraController.RotateCamera(rotateVector);
+        }
+
+        private void ZoomCamera()
+        {
+            CameraController.Zoom(-Input.mouseScrollDelta);
         }
     }
 }
