@@ -55,6 +55,7 @@ namespace XCOM
         // Cached References //
 
         // Public Methods //
+        public bool HasReachedDestination(Vector3 destination) => Mover.HasReachedDestination(destination);
         public void ToggleSelectedDisplay(bool isEnabled) => UISelected.ToggleDisplay(isEnabled);
 
         public void SetMoveDestination(Vector3 newDestination)

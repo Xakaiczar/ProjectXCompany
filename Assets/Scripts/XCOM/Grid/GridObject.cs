@@ -26,6 +26,8 @@ namespace XCOM.Grid
         }
 
         // Private Properties //
+        [SerializeField] private List<MonoBehaviour> entitiesOnTile;
+
         private GridPosition position;
 
         // Cached Components //
@@ -51,10 +53,48 @@ namespace XCOM.Grid
             SetPosition(new GridPosition(x, z));
         }
 
+        public void AddEntityToTile(MonoBehaviour entity)
+        {
+            if (entitiesOnTile.Contains(entity)) return;
+
+            entitiesOnTile.Add(entity);
+
+            UpdateText();
+        }
+
+        public void RemoveEntityFromTile(MonoBehaviour entity)
+        {
+            if (!entitiesOnTile.Contains(entity)) return;
+
+            entitiesOnTile.Remove(entity);
+
+            UpdateText();
+        }
+
         // Private Methods //
+        private void Awake()
+        {
+            entitiesOnTile = new List<MonoBehaviour>();
+        }
+
         private void Start()
         {
-            UIGridObject.SetText(position.ToString());
+            UpdateText();
+        }
+
+        private void UpdateText()
+        {
+            string text = position.ToString();
+
+            if (entitiesOnTile.Count > 0)
+            {
+                foreach (var item in entitiesOnTile)
+                {
+                    text += $"\n {item.name}";
+                }
+            }
+
+            UIGridObject.SetText(text);
         }
     }
 }

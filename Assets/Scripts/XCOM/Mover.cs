@@ -27,7 +27,7 @@ namespace XCOM
         // Public Methods //
         public bool MoveTowards(Vector3 destination)
         {
-            if (Vector3.Distance(transform.position, destination) < stoppingDistance)
+            if (HasReachedDestination(destination))
             {
                 transform.position = destination;
 
@@ -36,11 +36,16 @@ namespace XCOM
             else
             {
                 Vector3 direction = GetMoveDirection(destination);
-                
+
                 transform.position += direction.normalized * speed * Time.deltaTime;
 
                 return true;
             }
+        }
+
+        public bool HasReachedDestination(Vector3 destination)
+        {
+            return Vector3.Distance(transform.position, destination) < stoppingDistance;
         }
 
         public Vector3 GetMoveDirection(Vector3 destination)

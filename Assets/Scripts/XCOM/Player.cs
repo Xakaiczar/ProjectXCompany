@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
+using XCOM.Grid;
+
 namespace XCOM
 {
     public class Player : MonoBehaviour
@@ -16,6 +18,14 @@ namespace XCOM
         // Public Properties //
 
         // Protected Properties //
+        protected GridSystem GridSystem
+        {
+            get
+            {
+                if (!_gridSystem) _gridSystem = FindObjectOfType<GridSystem>();
+                return _gridSystem;
+            }
+        }
 
         // Private Properties //
         [SerializeField] private GameObject cursor;
@@ -30,29 +40,51 @@ namespace XCOM
         // Cached Components //
 
         // Cached References //
+        private GridSystem _gridSystem;
 
         // Public Methods //
-
-        // Private Methods //
-        private void Start()
+        public void CreateUnits()
         {
             units = new List<Unit>();
 
             for (int i = 0; i < nUnits; i++)
             {
                 Vector3 nextPos = new Vector3(i * 2f, 0f, 0f);
-                Unit unit = Instantiate(unitPrefab, nextPos, Quaternion.identity, transform);
 
-                units.Add(unit);
+                CreateUnit(i, nextPos);
             }
 
             SelectUnit(units[0]);
+        }
+
+        // Private Methods //
+        private void Start()
+        {
+            CreateUnits();
         }
 
         private void Update()
         {
             cursor.transform.position = GetHitLocation();
             HandleClickEvent();
+        }
+
+        private void CreateUnit(int id, Vector3 position)
+        {
+            Unit unit = Instantiate(unitPrefab, position, Quaternion.identity, transform);
+
+            unit.name = $"Player Unit {id}";
+
+            units.Add(unit);
+
+            AddUnitToCurrentTile(unit);
+        }
+
+        private void AddUnitToCurrentTile(Unit unit)
+        {
+            GridObject gridObject = GridSystem.GetGridObject(unit.transform.position);
+
+            gridObject.AddEntityToTile(unit);
         }
 
         private Vector3 GetHitLocation()
@@ -96,7 +128,35 @@ namespace XCOM
             }
             else if (Input.GetMouseButtonDown(1))
             {
-                selectedUnit?.SetMoveDestination(GetHitLocation());
+                Vector3 hit = GetHitLocation();
+                GridObject clickedGridObject = GridSystem.GetGridObject(hit);
+
+                StartCoroutine(UpdateTile(clickedGridObject.transform.position));
+
+                selectedUnit?.SetMoveDestination(clickedGridObject.transform.position);
+            }
+        }
+
+        private IEnumerator UpdateTile(Vector3 destination)
+        {
+            Vector3 start = selectedUnit.transform.position;
+
+            while (!selectedUnit.HasReachedDestination(destination))
+            {
+                Vector3 current = selectedUnit.transform.position;
+
+                GridObject before = GridSystem.GetGridObject(start);
+                GridObject after = GridSystem.GetGridObject(current);
+
+                if (before != after)
+                {
+                    before.RemoveEntityFromTile(selectedUnit);
+                    AddUnitToCurrentTile(selectedUnit);
+
+                    start = current;
+                }
+
+                yield return null;
             }
         }
 

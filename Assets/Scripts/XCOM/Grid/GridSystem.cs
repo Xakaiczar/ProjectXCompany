@@ -53,8 +53,20 @@ namespace XCOM.Grid
             return grid[gridPosition.x, gridPosition.z];
         }
 
+        public GridObject GetGridObject(Vector3 worldPosition)
+        {
+            GridPosition gridPosition = GetGridPosition(worldPosition);
+            
+            return GetGridObject(gridPosition);
+        }
+
         // Private Methods //
         private void Awake()
+        {
+            CreateGrid();
+        }
+
+        private void CreateGrid()
         {
             grid = new GridObject[gridWidth, gridLength];
 
