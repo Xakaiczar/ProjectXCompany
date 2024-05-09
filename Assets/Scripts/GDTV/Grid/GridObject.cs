@@ -49,8 +49,6 @@ namespace GDTV
         public void AddUnit(Unit unit)
         {
             unitList.Add(unit);
-
-            Debug.Log($"{gridPosition}: {unitList.Count}");
         }
 
         public void RemoveUnit(Unit unit)

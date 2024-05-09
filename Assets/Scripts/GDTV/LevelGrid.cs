@@ -64,7 +64,7 @@ namespace GDTV
 
             if (Instance != null)
             {
-                Debug.Log("There's more than one UAS!");
+                Debug.Log("There's more than one LevelGrid!");
 
                 Destroy(gameObject);
 

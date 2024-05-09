@@ -128,13 +128,18 @@ namespace XCOM
             }
             else if (Input.GetMouseButtonDown(1))
             {
-                Vector3 hit = GetHitLocation();
-                GridObject clickedGridObject = GridSystem.GetGridObject(hit);
-
-                StartCoroutine(UpdateTile(clickedGridObject.transform.position));
-
-                selectedUnit?.SetMoveDestination(clickedGridObject.transform.position);
+                MoveUnit();
             }
+        }
+
+        private void MoveUnit()
+        {
+            Vector3 hit = GetHitLocation();
+            GridObject clickedGridObject = GridSystem.GetGridObject(hit);
+
+            StartCoroutine(UpdateTile(clickedGridObject.transform.position));
+
+            selectedUnit?.SetMoveDestination(clickedGridObject.transform.position);
         }
 
         private IEnumerator UpdateTile(Vector3 destination)
