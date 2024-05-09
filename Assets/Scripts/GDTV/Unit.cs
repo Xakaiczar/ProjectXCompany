@@ -20,6 +20,7 @@ namespace GDTV
         [SerializeField] private Animator unitAnimator;
 
         private Vector3 targetPosition;
+        private GridPosition gridPosition;
 
         // Cached Components //
 
@@ -35,6 +36,13 @@ namespace GDTV
         private void Awake()
         {
             targetPosition = transform.position;
+        }
+
+        private void Start()
+        {
+            gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
+
+            LevelGrid.Instance.AddUnitToGridPosition(gridPosition, this);
         }
         
         private void Update()
@@ -56,6 +64,15 @@ namespace GDTV
             else
             {
                 unitAnimator.SetBool("isMoving", false);
+            }
+
+            GridPosition newGridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
+
+            if (newGridPosition != gridPosition)
+            {
+                LevelGrid.Instance.UnitMovedGridPosition(this, gridPosition, newGridPosition);
+
+                gridPosition = newGridPosition;
             }
         }
     }

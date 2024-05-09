@@ -19,6 +19,7 @@ namespace GDTV
         // Private Properties //
         private GridSystem gridSystem;
         private GridPosition gridPosition;
+        private List<Unit> unitList;
 
         // Cached Components //
 
@@ -29,11 +30,37 @@ namespace GDTV
         {
             this.gridSystem = gridSystem;
             this.gridPosition = gridPosition;
+
+            unitList = new List<Unit>();
         }
 
         public override string ToString()
         {
-            return gridPosition.ToString();
+            string unitString = "";
+
+            foreach (var unit in unitList)
+            {
+                unitString += unit + "\n";
+            }
+
+            return gridPosition.ToString() + "\n" + unitString;
+        }
+
+        public void AddUnit(Unit unit)
+        {
+            unitList.Add(unit);
+
+            Debug.Log($"{gridPosition}: {unitList.Count}");
+        }
+
+        public void RemoveUnit(Unit unit)
+        {
+            unitList.Remove(unit);
+        }
+
+        public List<Unit> GetUnits()
+        {
+            return unitList;
         }
 
         // Private Methods //

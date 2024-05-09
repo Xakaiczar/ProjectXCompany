@@ -17,9 +17,6 @@ namespace GDTV
         // Protected Properties //
 
         // Private Properties //
-        [SerializeField] private Transform gridDebugObjectPrefab;
-
-        private GridSystem gridSystem;
 
         // Cached Components //
 
@@ -30,13 +27,12 @@ namespace GDTV
         // Private Methods //
         private void Start()
         {
-            gridSystem = new GridSystem(10, 10, 2f);
-            gridSystem.CreateDebugObjects(gridDebugObjectPrefab);
+            // 
         }
 
         private void Update()
         {
-            Debug.Log(gridSystem.GetGridPosition(MouseWorld.GetPosition()));
+            // Debug.Log(gridSystem.GetGridPosition(MouseWorld.GetPosition()));
         }
     }
 }
