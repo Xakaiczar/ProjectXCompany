@@ -214,7 +214,8 @@ namespace XCOM
             {
                 moveVector += Vector3.left;
             }
-            else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            
+            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             {
                 moveVector += Vector3.right;
             }
@@ -223,7 +224,8 @@ namespace XCOM
             {
                 moveVector += Vector3.forward;
             }
-            else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+            
+            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
             {
                 moveVector += Vector3.back;
             }
@@ -239,7 +241,8 @@ namespace XCOM
             {
                 rotateVector += Vector3.up;
             }
-            else if (Input.GetKey(KeyCode.E))
+            
+            if (Input.GetKey(KeyCode.E))
             {
                 rotateVector += Vector3.down;
             }

@@ -31,19 +31,22 @@ namespace GDTV
 
             if (Input.GetKey(KeyCode.W))
             {
-                inputMoveDirection.z = 1f;
+                inputMoveDirection.z += 1f;
             }
+
             if (Input.GetKey(KeyCode.S))
             {
-                inputMoveDirection.z = -1f;
+                inputMoveDirection.z -= 1f;
             }
+
             if (Input.GetKey(KeyCode.A))
             {
-                inputMoveDirection.x = -1f;
+                inputMoveDirection.x -= 1f;
             }
+
             if (Input.GetKey(KeyCode.D))
             {
-                inputMoveDirection.x = 1f;
+                inputMoveDirection.x += 1f;
             }
 
             float moveSpeed = 10f;
@@ -55,11 +58,12 @@ namespace GDTV
 
             if (Input.GetKey(KeyCode.Q))
             {
-                rotationVector.y = 1f;
+                rotationVector.y += 1f;
             }
+
             if (Input.GetKey(KeyCode.E))
             {
-                rotationVector.y = -1f;
+                rotationVector.y -= 1f;
             }
 
             float rotationSpeed = 100f;

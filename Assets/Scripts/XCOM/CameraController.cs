@@ -27,7 +27,12 @@ namespace XCOM
         // Public Methods //
         public void MoveCamera(Vector3 moveVector)
         {
-            transform.position += moveVector * moveSpeed * Time.deltaTime;
+            Vector3 x = transform.right * moveVector.x;
+            Vector3 y = transform.up * moveVector.y;
+            Vector3 z = transform.forward * moveVector.z;
+            Vector3 v = x + y + z;
+
+            transform.position += v * moveSpeed * Time.deltaTime;
         }
 
         public void RotateCamera(Vector3 rotationVector)
