@@ -4,34 +4,37 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+namespace XCOM
 {
-    // Public Events //
-
-    // Public Enums //
-
-    // Public Properties //
-
-    // Protected Properties //
-
-    // Private Properties //
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float rotateSpeed;
-
-    // Cached Components //
-
-    // Cached References //
-
-    // Public Methods //
-    public void MoveCamera(Vector3 moveVector)
+    public class CameraController : MonoBehaviour
     {
-        transform.position += moveVector * moveSpeed * Time.deltaTime;
-    }
+        // Public Events //
 
-    public void RotateCamera(Vector3 rotationVector)
-    {
-        transform.Rotate(rotationVector * rotateSpeed * Time.deltaTime);
-    }
+        // Public Enums //
 
-    // Private Methods //
+        // Public Properties //
+
+        // Protected Properties //
+
+        // Private Properties //
+        [SerializeField] private float moveSpeed;
+        [SerializeField] private float rotateSpeed;
+
+        // Cached Components //
+
+        // Cached References //
+
+        // Public Methods //
+        public void MoveCamera(Vector3 moveVector)
+        {
+            transform.position += moveVector * moveSpeed * Time.deltaTime;
+        }
+
+        public void RotateCamera(Vector3 rotationVector)
+        {
+            transform.Rotate(rotationVector * rotateSpeed * Time.deltaTime);
+        }
+
+        // Private Methods //
+    }
 }

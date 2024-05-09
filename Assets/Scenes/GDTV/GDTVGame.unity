@@ -1085,28 +1085,50 @@ PrefabInstance:
     - target: {fileID: 5081298584595462539, guid: d3e8811aac5218d45a44496d644f0d57,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000016410377
+      value: 0.000000016410377
       objectReference: {fileID: 0}
     - target: {fileID: 5081298584595462539, guid: d3e8811aac5218d45a44496d644f0d57,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000005172915
+      value: -0.000000005172915
       objectReference: {fileID: 0}
     - target: {fileID: 5091345661458415555, guid: d3e8811aac5218d45a44496d644f0d57,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000016410377
+      value: 0.000000016410377
       objectReference: {fileID: 0}
     - target: {fileID: 5091345661458415555, guid: d3e8811aac5218d45a44496d644f0d57,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000005172915
+      value: -0.000000005172915
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4612362459181272188, guid: d3e8811aac5218d45a44496d644f0d57,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4531520306081959398}
   m_SourcePrefab: {fileID: 100100000, guid: d3e8811aac5218d45a44496d644f0d57, type: 3}
+--- !u!1 &4531520306081959397 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4612362459181272188, guid: d3e8811aac5218d45a44496d644f0d57,
+    type: 3}
+  m_PrefabInstance: {fileID: 4531520306081959396}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4531520306081959398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4531520306081959397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f1663f367b2e914aac81534cbb001ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
