@@ -27,6 +27,15 @@ namespace XCOM
             }
         }
 
+        protected CameraController CameraController
+        {
+            get
+            {
+                if (!_camera) _camera = FindObjectOfType<CameraController>();
+                return _camera;
+            }
+        }
+
         // Private Properties //
         [SerializeField] private GameObject cursor;
         [SerializeField] private LayerMask floorLayer;
@@ -41,6 +50,7 @@ namespace XCOM
 
         // Cached References //
         private GridSystem _gridSystem;
+        private CameraController _camera;
 
         // Public Methods //
         public void CreateUnits()
@@ -66,7 +76,9 @@ namespace XCOM
         private void Update()
         {
             cursor.transform.position = GetHitLocation();
+
             HandleClickEvent();
+            HandleButtonEvent();
         }
 
         private void CreateUnit(int id, Vector3 position)
@@ -186,6 +198,53 @@ namespace XCOM
             {
                 unit.ToggleSelectedDisplay(unit == selectedUnit);
             }
+        }
+
+        private void HandleButtonEvent()
+        {
+            MoveCamera();
+            RotateCamera();
+        }
+
+        private void MoveCamera()
+        {
+            Vector3 moveVector = Vector3.zero;
+
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            {
+                moveVector += Vector3.left;
+            }
+            else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            {
+                moveVector += Vector3.right;
+            }
+
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+            {
+                moveVector += Vector3.forward;
+            }
+            else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+            {
+                moveVector += Vector3.back;
+            }
+
+            CameraController.MoveCamera(moveVector);
+        }
+
+        private void RotateCamera()
+        {
+            Vector3 rotateVector = Vector3.zero;
+
+            if (Input.GetKey(KeyCode.Q))
+            {
+                rotateVector += Vector3.up;
+            }
+            else if (Input.GetKey(KeyCode.E))
+            {
+                rotateVector += Vector3.down;
+            }
+
+            CameraController.RotateCamera(rotateVector);
         }
     }
 }
