@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  stoppingDistance: 0.01
+  stoppingDistance: 0.1
 --- !u!65 &5769420134274600956
 BoxCollider:
   m_ObjectHideFlags: 0
