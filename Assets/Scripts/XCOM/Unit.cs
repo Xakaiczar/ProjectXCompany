@@ -15,6 +15,7 @@ namespace XCOM
         // Public Enums //
 
         // Public Properties //
+        public int MaxMoveDistance { get { return maxMoveDistance; } }
 
         // Protected Properties //
         protected Model Model
@@ -45,6 +46,8 @@ namespace XCOM
         }
 
         // Private Properties //
+        [SerializeField] private int maxMoveDistance;
+
         private Vector3 moveDestination;
 
         // Cached Components //

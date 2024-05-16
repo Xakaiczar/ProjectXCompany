@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace XCOM.Grid
 {
@@ -13,6 +14,16 @@ namespace XCOM.Grid
             this.z = z;
         }
 
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(x, z);
+        }
+
+        public override string ToString()
+        {
+            return $"x: {x}; z: {z}";
+        }
+
         public override bool Equals(object obj)
         {
             return obj is GridPosition position &&
@@ -25,14 +36,12 @@ namespace XCOM.Grid
             return this == other;
         }
 
-        public override int GetHashCode()
+        public static float Distance(GridPosition a, GridPosition b)
         {
-            return HashCode.Combine(x, z);
-        }
-
-        public override string ToString()
-        {
-            return $"x: {x}; z: {z}";
+            float dx = b.x - a.x;
+            float dz = b.z - a.z;
+            
+            return Mathf.Sqrt(Mathf.Pow(dx, 2) + Mathf.Pow(dz, 2));
         }
 
         public static bool operator ==(GridPosition a, GridPosition b)
@@ -43,6 +52,16 @@ namespace XCOM.Grid
         public static bool operator !=(GridPosition a, GridPosition b)
         {
             return !(a == b);
+        }
+
+        public static GridPosition operator +(GridPosition a, GridPosition b)
+        {
+            return new GridPosition(a.x + b.x, a.z + b.z);
+        }
+
+        public static GridPosition operator -(GridPosition a, GridPosition b)
+        {
+            return new GridPosition(a.x - b.x, a.z - b.z);
         }
     }
 }

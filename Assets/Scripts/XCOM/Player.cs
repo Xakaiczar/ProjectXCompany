@@ -183,6 +183,13 @@ namespace XCOM
             Vector3 hit = GetHitLocation();
             GridObject clickedGridObject = GridSystem.GetGridObject(hit);
 
+            GridPosition destination = GridSystem.GetGridPosition(clickedGridObject.transform.position);
+            GridPosition unit = GridSystem.GetGridPosition(selectedUnit.transform.position);
+
+            float distance = GridPosition.Distance(unit, destination);
+
+            if (distance > selectedUnit.MaxMoveDistance) return;
+
             StartCoroutine(UpdateTile(clickedGridObject.transform.position));
 
             selectedUnit?.SetMoveDestination(clickedGridObject.transform.position);
