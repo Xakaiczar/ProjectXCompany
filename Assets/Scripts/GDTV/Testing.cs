@@ -19,6 +19,7 @@ namespace GDTV
         // Private Properties //
 
         // Cached Components //
+        [SerializeField] private Unit unit;
 
         // Cached References //
 
@@ -32,7 +33,10 @@ namespace GDTV
 
         private void Update()
         {
-            // Debug.Log(gridSystem.GetGridPosition(MouseWorld.GetPosition()));
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                unit.GetMoveAction().GetValidActionGridPositionList();
+            }
         }
     }
 }

@@ -17,25 +17,28 @@ namespace GDTV
         // Protected Properties //
 
         // Private Properties //
-        [SerializeField] private Animator unitAnimator;
-
-        private Vector3 targetPosition;
         private GridPosition gridPosition;
 
         // Cached Components //
+        private MoveAction moveAction;
 
         // Cached References //
 
         // Public Methods //
-        public void Move(Vector3 targetPosition)
+        public MoveAction GetMoveAction()
         {
-            this.targetPosition = targetPosition;
+            return moveAction;
+        }
+
+        public GridPosition GetGridPosition()
+        {
+            return gridPosition;
         }
 
         // Private Methods //
         private void Awake()
         {
-            targetPosition = transform.position;
+            moveAction = GetComponent<MoveAction>();
         }
 
         private void Start()
@@ -47,25 +50,6 @@ namespace GDTV
         
         private void Update()
         {
-            float stoppingDistance = 0.1f;
-
-            if (Vector3.Distance(transform.position, targetPosition) > stoppingDistance)
-            {
-                Vector3 moveDirection = (targetPosition - transform.position).normalized;
-                float moveSpeed = 4f;
-                float rotateSpeed = 10f;
-
-                transform.position += moveDirection * moveSpeed * Time.deltaTime;
-
-                transform.forward = Vector3.Lerp(transform.forward, moveDirection, rotateSpeed * Time.deltaTime);
-
-                unitAnimator.SetBool("isMoving", true);
-            }
-            else
-            {
-                unitAnimator.SetBool("isMoving", false);
-            }
-
             GridPosition newGridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
 
             if (newGridPosition != gridPosition)

@@ -55,7 +55,7 @@ namespace GDTV
 
                 if (unitSelected) return;
 
-                selectedUnit.Move(MouseWorld.GetPosition());
+                selectedUnit.GetMoveAction().Move(MouseWorld.GetPosition());
             }
         }
 
