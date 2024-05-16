@@ -108,7 +108,7 @@ namespace XCOM
 
         private RaycastHit GetHitOnLayer(LayerMask layer)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = GetRayFromMousePosition();
             bool hasHit = Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, layer);
 
             return hit;
@@ -139,6 +139,40 @@ namespace XCOM
                 TrySelectUnit();
             }
             else if (Input.GetMouseButtonDown(1))
+            {
+                TryMoveUnit();
+            }
+        }
+
+        private void TrySelectUnit()
+        {
+            Transform hitTransform = GetHitOnLayer(unitLayer).transform;
+            Unit clickedUnit = hitTransform?.GetComponent<Unit>();
+
+            if (clickedUnit)
+            {
+                SelectUnit(clickedUnit);
+            }
+        }
+
+        private void SelectUnit(Unit selectedUnit)
+        {
+            this.selectedUnit = selectedUnit;
+
+            OnUnitSelected?.Invoke(null, this.selectedUnit);
+
+            foreach (Unit unit in units)
+            {
+                unit.ToggleSelectedDisplay(unit == selectedUnit);
+            }
+        }
+
+        private void TryMoveUnit()
+        {
+            Transform hitTransform = GetHitOnLayer(floorLayer).transform;
+            GridObject clickedGridSpace = hitTransform?.GetComponent<GridObject>();
+
+            if (clickedGridSpace)
             {
                 MoveUnit();
             }
@@ -174,29 +208,6 @@ namespace XCOM
                 }
 
                 yield return null;
-            }
-        }
-
-        private void TrySelectUnit()
-        {
-            Transform hitTransform = GetHitOnLayer(unitLayer).transform;
-            Unit clickedUnit = hitTransform?.GetComponent<Unit>();
-
-            if (clickedUnit)
-            {
-                SelectUnit(clickedUnit);
-            }
-        }
-
-        private void SelectUnit(Unit selectedUnit)
-        {
-            this.selectedUnit = selectedUnit;
-
-            OnUnitSelected?.Invoke(null, this.selectedUnit);
-
-            foreach (Unit unit in units)
-            {
-                unit.ToggleSelectedDisplay(unit == selectedUnit);
             }
         }
 
