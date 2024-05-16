@@ -11,19 +11,18 @@ namespace XCOM
     public class Player : MonoBehaviour
     {
         // Public Events //
-        public event EventHandler<Unit> OnUnitSelected;
 
         // Public Enums //
 
         // Public Properties //
 
         // Protected Properties //
-        protected GridSystem GridSystem
+        protected UnitController UnitController
         {
             get
             {
-                if (!_gridSystem) _gridSystem = FindObjectOfType<GridSystem>();
-                return _gridSystem;
+                if (!_unitController) _unitController = GetComponent<UnitController>();
+                return _unitController;
             }
         }
 
@@ -40,37 +39,19 @@ namespace XCOM
         [SerializeField] private GameObject cursor;
         [SerializeField] private LayerMask floorLayer;
         [SerializeField] private LayerMask unitLayer;
-        [SerializeField] private Unit unitPrefab;
-        [SerializeField] private int nUnits;
-
-        private List<Unit> units;
-        private Unit selectedUnit;
 
         // Cached Components //
+        private UnitController _unitController;
 
         // Cached References //
-        private GridSystem _gridSystem;
         private CameraController _camera;
 
         // Public Methods //
-        public void CreateUnits()
-        {
-            units = new List<Unit>();
-
-            for (int i = 0; i < nUnits; i++)
-            {
-                Vector3 nextPos = new Vector3(i * 2f, 0f, 0f);
-
-                CreateUnit(i, nextPos);
-            }
-
-            SelectUnit(units[0]);
-        }
 
         // Private Methods //
         private void Start()
         {
-            CreateUnits();
+            UnitController.CreateUnits();
         }
 
         private void Update()
@@ -79,24 +60,6 @@ namespace XCOM
 
             HandleClickEvent();
             HandleButtonEvent();
-        }
-
-        private void CreateUnit(int id, Vector3 position)
-        {
-            Unit unit = Instantiate(unitPrefab, position, Quaternion.identity, transform);
-
-            unit.name = $"Player Unit {id}";
-
-            units.Add(unit);
-
-            AddUnitToCurrentTile(unit);
-        }
-
-        private void AddUnitToCurrentTile(Unit unit)
-        {
-            GridObject gridObject = GridSystem.GetGridObject(unit.transform.position);
-
-            gridObject.AddEntityToTile(unit);
         }
 
         private Vector3 GetHitLocation()
@@ -151,19 +114,7 @@ namespace XCOM
 
             if (clickedUnit)
             {
-                SelectUnit(clickedUnit);
-            }
-        }
-
-        private void SelectUnit(Unit selectedUnit)
-        {
-            this.selectedUnit = selectedUnit;
-
-            OnUnitSelected?.Invoke(null, this.selectedUnit);
-
-            foreach (Unit unit in units)
-            {
-                unit.ToggleSelectedDisplay(unit == selectedUnit);
+                UnitController.SelectUnit(clickedUnit);
             }
         }
 
@@ -174,47 +125,7 @@ namespace XCOM
 
             if (clickedGridSpace)
             {
-                MoveUnit();
-            }
-        }
-
-        private void MoveUnit()
-        {
-            Vector3 hit = GetHitLocation();
-            GridObject clickedGridObject = GridSystem.GetGridObject(hit);
-
-            GridPosition destination = GridSystem.GetGridPosition(clickedGridObject.transform.position);
-            GridPosition unit = GridSystem.GetGridPosition(selectedUnit.transform.position);
-
-            float distance = GridPosition.Distance(unit, destination);
-
-            if (distance > selectedUnit.MaxMoveDistance) return;
-
-            StartCoroutine(UpdateTile(clickedGridObject.transform.position));
-
-            selectedUnit?.SetMoveDestination(clickedGridObject.transform.position);
-        }
-
-        private IEnumerator UpdateTile(Vector3 destination)
-        {
-            Vector3 start = selectedUnit.transform.position;
-
-            while (!selectedUnit.HasReachedDestination(destination))
-            {
-                Vector3 current = selectedUnit.transform.position;
-
-                GridObject before = GridSystem.GetGridObject(start);
-                GridObject after = GridSystem.GetGridObject(current);
-
-                if (before != after)
-                {
-                    before.RemoveEntityFromTile(selectedUnit);
-                    AddUnitToCurrentTile(selectedUnit);
-
-                    start = current;
-                }
-
-                yield return null;
+                UnitController.MoveSelectedUnit(clickedGridSpace);
             }
         }
 

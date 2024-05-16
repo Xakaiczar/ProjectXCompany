@@ -14,6 +14,7 @@ namespace XCOM.Grid
         // Public Enums //
 
         // Public Properties //
+        public int CellSize { get { return cellSize; } }
 
         // Protected Properties //
 
@@ -56,7 +57,7 @@ namespace XCOM.Grid
         public GridObject GetGridObject(Vector3 worldPosition)
         {
             GridPosition gridPosition = GetGridPosition(worldPosition);
-            
+
             return GetGridObject(gridPosition);
         }
 
