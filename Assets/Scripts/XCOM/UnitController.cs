@@ -80,6 +80,20 @@ namespace XCOM
             selectedUnit?.SetMoveDestination(destination.transform.position);
         }
 
+        public void MoveSelectedUnit(Vector3 destination)
+        {
+            GridPosition d = GridSystem.GetGridPosition(destination);
+            GridPosition unit = GridSystem.GetGridPosition(selectedUnit.transform.position);
+
+            float distance = GridPosition.Distance(unit, d);
+
+            if (distance > selectedUnit.MaxMoveDistance) return;
+
+            StartCoroutine(UpdateTile(destination));
+
+            selectedUnit?.SetMoveDestination(destination);
+        }
+
         // Private Methods //
         private void CreateUnit(int id, Vector3 position)
         {

@@ -4,8 +4,6 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-using XCOM.Grid;
-
 namespace XCOM
 {
     public class Player : MonoBehaviour
@@ -121,11 +119,10 @@ namespace XCOM
         private void TryMoveUnit()
         {
             Transform hitTransform = GetHitOnLayer(floorLayer).transform;
-            GridObject clickedGridSpace = hitTransform?.GetComponent<GridObject>();
 
-            if (clickedGridSpace)
+            if (hitTransform)
             {
-                UnitController.MoveSelectedUnit(clickedGridSpace);
+                UnitController.MoveSelectedUnit(hitTransform.position);
             }
         }
 
