@@ -154,6 +154,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedVisualPrefab: {fileID: 5427896051003688130, guid: 7fa1af4adee55ce498f7ce21bf268a5b,
     type: 3}
+  gridObjectPrefab: {fileID: 6743266143884996517, guid: 035894b3b9bbfde40a9fd2132b4a1dd7,
+    type: 3}
 --- !u!4 &150994976
 Transform:
   m_ObjectHideFlags: 0
@@ -425,12 +427,12 @@ PrefabInstance:
     - target: {fileID: 5081298584595462539, guid: d3e8811aac5218d45a44496d644f0d57,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000016410379
+      value: -0.000000016410379
       objectReference: {fileID: 0}
     - target: {fileID: 5081298584595462539, guid: d3e8811aac5218d45a44496d644f0d57,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000051729154
+      value: 0.0000000051729154
       objectReference: {fileID: 0}
     - target: {fileID: 5081298584595462539, guid: d3e8811aac5218d45a44496d644f0d57,
         type: 3}
@@ -465,12 +467,12 @@ PrefabInstance:
     - target: {fileID: 5091345661458415555, guid: d3e8811aac5218d45a44496d644f0d57,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000016410379
+      value: -0.000000016410379
       objectReference: {fileID: 0}
     - target: {fileID: 5091345661458415555, guid: d3e8811aac5218d45a44496d644f0d57,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000051729154
+      value: 0.0000000051729154
       objectReference: {fileID: 0}
     - target: {fileID: 5091345661458415555, guid: d3e8811aac5218d45a44496d644f0d57,
         type: 3}

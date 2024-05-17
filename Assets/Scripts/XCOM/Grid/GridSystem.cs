@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 namespace XCOM.Grid
 {
     public class GridSystem : MonoBehaviour
     {
         // Public Events //
+        public event EventHandler<GridObject> OnGridObjectCreation;
 
         // Public Enums //
 
@@ -75,11 +75,18 @@ namespace XCOM.Grid
             {
                 for (int z = 0; z < gridLength; z++)
                 {
-                    grid[x, z] = Instantiate(gridPrefab, GetWorldPosition(x, z), Quaternion.identity, transform);
-
-                    grid[x, z].SetPosition(new GridPosition(x, z));
+                    CreateGridObject(x, z);
                 }
             }
+        }
+
+        private void CreateGridObject(int x, int z)
+        {
+            grid[x, z] = Instantiate(gridPrefab, GetWorldPosition(x, z), Quaternion.identity, transform);
+
+            grid[x, z].SetPosition(new GridPosition(x, z));
+
+            OnGridObjectCreation?.Invoke(this, grid[x, z]);
         }
     }
 }

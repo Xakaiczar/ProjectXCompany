@@ -58,7 +58,7 @@ namespace XCOM
         {
             this.selectedUnit = selectedUnit;
 
-            OnUnitSelected?.Invoke(null, this.selectedUnit);
+            OnUnitSelected?.Invoke(this, this.selectedUnit);
         }
 
         public void MoveSelectedUnit(GridObject destination)

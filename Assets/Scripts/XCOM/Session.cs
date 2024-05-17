@@ -4,7 +4,9 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-namespace XCOM.Grid
+using XCOM.Grid;
+
+namespace XCOM
 {
     public class Session : MonoBehaviour
     {
@@ -33,6 +35,15 @@ namespace XCOM.Grid
             }
         }
 
+        protected GridSystem GridSystem
+        {
+            get
+            {
+                if (!_gridSystem) _gridSystem = FindObjectOfType<GridSystem>();
+                return _gridSystem;
+            }
+        }
+
         // Private Properties //
         [SerializeField] private int nPlayers;
         [SerializeField] private Player playerPrefab;
@@ -44,15 +55,17 @@ namespace XCOM.Grid
         // Cached References //
         private UIManager _uiManager;
         private UnitController _unitController;
+        private GridSystem _gridSystem;
 
         // Public Methods //
 
         // Private Methods //
-        private void Start()
+        private void Awake()
         {
             InitialisePlayers();
 
             UnitController.OnUnitSelected += SelectUnit;
+            GridSystem.OnGridObjectCreation += CreateGridObjectVisual;
         }
 
         private void InitialisePlayers()
@@ -73,6 +86,11 @@ namespace XCOM.Grid
         {
             UIManager.ShowSelectedVisual();
             UIManager.FollowSelectedVisual(selectedUnit.transform);
+        }
+
+        private void CreateGridObjectVisual(object sender, MonoBehaviour gridObject)
+        {
+            UIManager.CreateGridObjectVisual(gridObject.ToString(), gridObject.transform);
         }
     }
 }

@@ -3,27 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
-using XCOM.UI;
 
 namespace XCOM.Grid
 {
     public class GridObject : MonoBehaviour
     {
         // Public Events //
+        public event EventHandler<MonoBehaviour> OnEnterTile;
+        public event EventHandler<MonoBehaviour> OnExitTile;
 
         // Public Enums //
 
         // Public Properties //
+        public List<MonoBehaviour> EntitiesOnTile { get { return entitiesOnTile; } }
 
         // Protected Properties //
-        protected UIGridObject UIGridObject
-        {
-            get
-            {
-                if (!_uiGridObject) _uiGridObject = GetComponentInChildren<UIGridObject>();
-                return _uiGridObject;
-            }
-        }
 
         // Private Properties //
         [SerializeField] private List<MonoBehaviour> entitiesOnTile;
@@ -31,21 +25,27 @@ namespace XCOM.Grid
         private GridPosition position;
 
         // Cached Components //
-        private UIGridObject _uiGridObject;
 
         // Cached References //
 
         // Public Methods //
+        public string GetPosition()
+        {
+            return position.ToString();
+        }
+
+        public override string ToString()
+        {
+            return GetPosition();
+        }
+
         public void SetPosition(GridPosition position)
         {
             this.position = position;
 
-            string name = this.position.ToString();
+            string name = GetPosition();
 
             this.name = $"Grid Object ({name})";
-
-            UIGridObject.SetText(name);
-
         }
 
         public void SetPosition(int x, int z)
@@ -59,7 +59,7 @@ namespace XCOM.Grid
 
             entitiesOnTile.Add(entity);
 
-            UpdateText();
+            OnEnterTile?.Invoke(this, entity);
         }
 
         public void RemoveEntityFromTile(MonoBehaviour entity)
@@ -68,33 +68,13 @@ namespace XCOM.Grid
 
             entitiesOnTile.Remove(entity);
 
-            UpdateText();
+            OnExitTile?.Invoke(this, entity);
         }
 
         // Private Methods //
         private void Awake()
         {
             entitiesOnTile = new List<MonoBehaviour>();
-        }
-
-        private void Start()
-        {
-            UpdateText();
-        }
-
-        private void UpdateText()
-        {
-            string text = position.ToString();
-
-            if (entitiesOnTile.Count > 0)
-            {
-                foreach (var item in entitiesOnTile)
-                {
-                    text += $"\n {item.name}";
-                }
-            }
-
-            UIGridObject.SetText(text);
         }
     }
 }

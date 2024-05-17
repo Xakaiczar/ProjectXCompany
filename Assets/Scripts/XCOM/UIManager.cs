@@ -6,7 +6,7 @@ using UnityEngine;
 
 using XCOM.UI;
 
-namespace XCOM.Grid
+namespace XCOM
 {
     public class UIManager : MonoBehaviour
     {
@@ -20,8 +20,11 @@ namespace XCOM.Grid
 
         // Private Properties //
         [SerializeField] private UISelectedUnit selectedVisualPrefab;
+        [SerializeField] private UIGridObject gridObjectPrefab;
 
         private UISelectedUnit selectedVisual;
+        // private UIGridObject[,] grid;
+
 
         // Cached Components //
 
@@ -31,6 +34,7 @@ namespace XCOM.Grid
         public void ToggleSelectedVisual(bool isEnabled) => selectedVisual.ToggleDisplay(isEnabled);
         public void ShowSelectedVisual() => selectedVisual.ToggleDisplay(true);
         public void HideSelectedVisual() => selectedVisual.ToggleDisplay(false);
+        public void SetGridObjectVisualText(UIGridObject visual, string text) => visual.SetText(text);
 
         public void MoveSelectedVisual(Vector3 newPosition)
         {
@@ -40,8 +44,17 @@ namespace XCOM.Grid
         public void FollowSelectedVisual(Transform target)
         {
             MoveSelectedVisual(target.position);
-            
+
             selectedVisual.transform.parent = target;
+        }
+
+        public void CreateGridObjectVisual(string text, Transform parent)
+        {
+            var visual = Instantiate(gridObjectPrefab, parent);
+
+            visual.transform.position = gridObjectPrefab.transform.position + parent.position;
+
+            visual.SetText(text);
         }
 
         // Private Methods //
