@@ -59,11 +59,6 @@ namespace XCOM
             this.selectedUnit = selectedUnit;
 
             OnUnitSelected?.Invoke(null, this.selectedUnit);
-
-            foreach (Unit unit in units)
-            {
-                unit.ToggleSelectedDisplay(unit == selectedUnit);
-            }
         }
 
         public void MoveSelectedUnit(GridObject destination)

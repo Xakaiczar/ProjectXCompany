@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
-using XCOM.UI;
 
 namespace XCOM
 {
@@ -36,15 +35,6 @@ namespace XCOM
             }
         }
 
-        protected UISelectedUnit UISelected
-        {
-            get
-            {
-                if (!_uiSelected) _uiSelected = GetComponentInChildren<UISelectedUnit>();
-                return _uiSelected;
-            }
-        }
-
         // Private Properties //
         [SerializeField] private int maxMoveDistance;
 
@@ -53,13 +43,11 @@ namespace XCOM
         // Cached Components //
         private Model _model;
         private Mover _mover;
-        private UISelectedUnit _uiSelected;
 
         // Cached References //
 
         // Public Methods //
         public bool HasReachedDestination(Vector3 destination) => Mover.HasReachedDestination(destination);
-        public void ToggleSelectedDisplay(bool isEnabled) => UISelected.ToggleDisplay(isEnabled);
 
         public void SetMoveDestination(Vector3 newDestination)
         {
