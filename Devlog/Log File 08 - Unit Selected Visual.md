@@ -15,6 +15,6 @@ In `Player`, I created some units at runtime using the prefab, like they would b
 This works fine. I might do some refactoring down the line to make it work with events, but I don't really see any reason to overcomplicate this.
 
 ### Differences in Implementation
-Of course, I was never going to make a singleton like `UnitActionSystem`. An explanation can be found in my [first log](https://github.com/Xakaiczar/ProjectXCompany/blob/main/Devlog/Log%20File%201%20-%20General%20Design%20Principles.md#singletons). As usual, I just pass down the necessary data. In this case, a simple bool that tells the `UISelectedUnit` whether the unit is selected or not.
+Of course, I was never going to make a singleton like `UnitActionSystem`. An explanation can be found in my [first log](https://github.com/Xakaiczar/ProjectXCompany/blob/main/Devlog/Log%20File%2001%20-%20General%20Design%20Principles.md#singletons). As usual, I just pass down the necessary data. In this case, a simple bool that tells the `UISelectedUnit` whether the unit is selected or not.
 
 The idea of using events intrigued me. But at the moment, it seems like there isn't a massive difference between using events and a loop in a function call. Since I need to go through every single object anyway to not only enable the selected one, but disable the others, it felt like I didn't really get any value from an event call. I did eventually create an event in [c06e83a](https://github.com/Xakaiczar/ProjectXCompany/commit/c06e83a0493056e6db0b20576dfe690709b55878), but it currently doesn't do anything.
