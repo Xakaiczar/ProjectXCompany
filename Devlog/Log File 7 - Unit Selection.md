@@ -4,7 +4,7 @@ _Commit(s): [812717e](https://github.com/Xakaiczar/ProjectXCompany/commit/812717
 ### Code Explanation
 The purpose of this code is to handle the control and movement of multiple units.
 
-First of all, I realised after adding a second unit to the scene that I had to remove the `moveLocation` from the inspector, and set it to the `Transform.position` of the `Unit`. Otherwise, every unit walked straight to the origin at the start of the game!
+First of all, I realised after adding a second unit to the scene that I had to remove the `moveLocation` from the inspector, and set it equal to the `Transform.position` of the `Unit` on `Awake`. Otherwise it would default to `Vector3(0f, 0f, 0f)`, and every unit walked straight to the origin at the start of the game!
 
 Now I needed a way of finding a unit using the mouse. I went against the lecturer's original design (or so I thought!) and created a unit layer. This didn't matter so much to me, since the box collider I had made previously was at ground level anyway.
 
