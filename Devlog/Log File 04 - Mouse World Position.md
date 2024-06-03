@@ -33,7 +33,7 @@ There's also one big glaring difference between the two: singletons...
 
 And so it begins...
 
-I have hopefully made my stance on singletons very clear in my [first log](https://github.com/Xakaiczar/ProjectXCompany/blob/main/Devlog/Log%20File%201%20-%20General%20Design%20Principles.md#singletons). If memory serves me correctly, they crop up a _lot_ in this course, and was one of the biggest frustrations about doing it in the first place.
+I have hopefully made my stance on singletons very clear in my [first log](https://github.com/Xakaiczar/ProjectXCompany/blob/main/Devlog/Log%20File%2001%20-%20General%20Design%20Principles.md#singletons). If memory serves me correctly, they crop up a _lot_ in this course, and was one of the biggest frustrations about doing it in the first place.
 
 This is definitely one of those cases where we _do not_ want a weird dependency on the mouse. Best-case scenario, even if you want this as a singleton, using its global scope to directly reference it in `Unit` restricts the player's controller to mouse only. If you wanted to implement controller support, for example (or even just _keyboard_ support), you'd have to do a lot of rewriting. It also makes the `Unit` code harder to reuse and harder to debug. It just seems like a bad idea all round, really.
 
