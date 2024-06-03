@@ -61,7 +61,7 @@ Needless to say, a lot of the original singletons didn't make it. I regret nothi
 ### Code Readability
 I spend a lot of time writing my own code and not enough time looking at other people's.
 
-Case in point: I was recently working on a personal project using 5eTools' API, when at some point I realised their entire codebase was downloadable right there from the home page! Sounding like a winning formula to understand the API and expedite the project's completion, I decided to have a cheeky gander at how they'd parsed the data.
+Case in point: I was recently working on a personal project using an external API; it came from an external website that didn't meet all my requirements, so I decided to make my own web app with their data. It turns out however, that website has their entire codebase downloadable right from the home page! Since it sounded like a winning formula to help understand the API and expedite the project's completion, I decided to have a cheeky gander at how they'd parsed the data.
 
 Needless to say, either the developer(s) are way beyond my level or exceptionally bad, because I didn't understand a lot of what I was reading at a glance. However, I have reason to believe it's the former (especially since I'm only a graduate!). But the more I read, the more it made sense in a different way...
 
@@ -69,8 +69,8 @@ When you read my code, I think it becomes very apparent that I write it for huma
 
 However, code is _meant_ for computers, meaning that I might be inadvertently be affecting performance as the computer deciphers my jargon. Almost like speaking fluent English to someone who only speaks Spanish. In other words, inefficient!
 
-For example, 5eTools is a website, which uses JavaScript as its scripting language. Now, I'm not an expert in the ins-and-outs of web development, but I know that scripts are render-blocking, my understanding of that being they need to be as small as possible so the rest of the page can load. This means that one-line functions with as few characters as possible is probably the way to go when making a web app.
+For example, this website obviously uses JavaScript as its scripting language. Now, I'm not an expert in the ins-and-outs of web development, but I know that scripts are render-blocking, my understanding of that being they need to be as small as possible so the rest of the page can load. This means that one-line functions with as few characters as possible is probably the way to go when making a web app.
 
 So, while I clearly prefer more verbose solutions, there may be unintended consequences that I'm not quite aware of yet. The only thing that's holding me back from changing is that I still need to be able to understand my own code during development, and trying to code golf it for minimal gains isn't going to help at this point. Perhaps it's possible to write a script in a very human-like way, then optimise it afterwards. I think it's something I'd need to research.
 
-But for now, I'm writing my code for humans rather than computers. In other words, I may be working in what is perhaps a sub-optimal way, with the knowledge that I may need to reconsider how I write code in the future.
+But for now, I'm writing my code for humans rather than computers. In other words, I am working in what is perhaps a sub-optimal way, with the knowledge that I may need to reconsider how I write code in the future.
