@@ -57,3 +57,20 @@ I would also _never_ have a singleton be considered global state. Global state h
 Plus, if and when the need arises, I would not have a component _also_ be a singleton; that violates the single responsibility principle. I would probably just create a `Singleton` component whose sole purpose is to make the attached object a singleton, or even a `SingletonManager` that tracks all the wannabe-singleton objects and makes sure they persist as you'd expect, deleting any duplicates.
 
 Needless to say, a lot of the original singletons didn't make it. I regret nothing.
+
+### Code Readability
+I spend a lot of time writing my own code and not enough time looking at other people's.
+
+Case in point: I was recently working on a personal project using 5eTools' API, when at some point I realised their entire codebase was downloadable right there from the home page! Sounding like a winning formula to understand the API and expedite the project's completion, I decided to have a cheeky gander at how they'd parsed the data.
+
+Needless to say, either the developer(s) are way beyond my level or exceptionally bad, because I didn't understand a lot of what I was reading at a glance. However, I have reason to believe it's the former (especially since I'm only a graduate!). But the more I read, the more it made sense in a different way...
+
+When you read my code, I think it becomes very apparent that I write it for humans, not computers. In some ways I think this is a good thing; the code is easier to read - and therefore debug - making it much easier to maintain in the long run.
+
+However, code is _meant_ for computers, meaning that I might be inadvertently be affecting performance as the computer deciphers my jargon. Almost like speaking fluent English to someone who only speaks Spanish. In other words, inefficient!
+
+For example, 5eTools is a website, which uses JavaScript as its scripting language. Now, I'm not an expert in the ins-and-outs of web development, but I know that scripts are render-blocking, my understanding of that being they need to be as small as possible so the rest of the page can load. This means that one-line functions with as few characters as possible is probably the way to go when making a web app.
+
+So, while I clearly prefer more verbose solutions, there may be unintended consequences that I'm not quite aware of yet. The only thing that's holding me back from changing is that I still need to be able to understand my own code during development, and trying to code golf it for minimal gains isn't going to help at this point. Perhaps it's possible to write a script in a very human-like way, then optimise it afterwards. I think it's something I'd need to research.
+
+But for now, I'm writing my code for humans rather than computers. In other words, I may be working in what is perhaps a sub-optimal way, with the knowledge that I may need to reconsider how I write code in the future.
